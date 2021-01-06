@@ -1,12 +1,19 @@
 import React,{useState,useEffect} from "react";
-import { Navbar, Button, Table } from "react-bootstrap";
+import { Form, Button, Table,FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 function Invoice(props) {
-  const[invoceList,setInvoiceList]=useState([])
+  const[invoceList,setInvoiceList]=useState([]);
+  const[search,setSearch]=useState("")
+
   useEffect(() => {
    const invoice=JSON.parse(localStorage.getItem("list"))||[]
    setInvoiceList(invoice)
   }, [])
+  useEffect(()=>{
+    const invoice=JSON.parse(localStorage.getItem("list"))||[]
+    setInvoiceList(invoice?.filter(value => value?.name?.toLowerCase().indexOf(search.toLowerCase()) !== -1))
+  },[search])
+
 console.log(invoceList,"zzzzzz")
 const handleDelete=async(i)=>{
   const updatedList=[...invoceList]
@@ -19,16 +26,16 @@ props.history.push({pathname:"/frm",state:{index:i,value:val}})
 }
   return (
     <div>
-      <div>
-        <Navbar bg="light" expand="lg" className="box0">
-          <Navbar.Brand className="box">Invoice Managment System </Navbar.Brand>
-          <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
-          <Link to="/"> 
-          <Button variant="success">Log out</Button> </Link>
-        </Navbar>
-      </div>
-
       <div className="container mt-5">
+      <Form inline>
+              <FormControl
+                type="text"
+                placeholder="Search by Item name"
+                className="mr-sm-2"
+                onChange={(e)=>setSearch(e.target.value)}
+              />
+            
+          </Form>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
@@ -53,7 +60,7 @@ props.history.push({pathname:"/frm",state:{index:i,value:val}})
               <td>{val.price}</td>
               <td>{val.discount}</td>
               <td>{val.tax}</td>
-              <td> <Button variant="primary" onClick={()=>handleEdit(i,val)}>Edit</Button>{' '}
+              <td> <Button variant="primary"  onClick={()=>handleEdit(i,val)}>Edit</Button>{' '}
               <Button variant="danger" onClick={()=>handleDelete(i)}>Delete</Button></td>
             </tr>
               )
