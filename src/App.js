@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import SignIn from "./Components/SignIn";
+import SignUp from "./Components/SignUp";
+import Frm from "./Components/Frm";
+import Listone from "./Components/Listone";
+import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <HashRouter>
+        <Switch>
+          <Route path="/" exact component={SignIn} />
+          <Route path="/Signup" exact component={SignUp} />
+          <Route path="/Frm" exact component={Frm} />
+          <Route path="/listone" exact component={Listone} />
+        </Switch>
+      </HashRouter>
     </div>
   );
 }

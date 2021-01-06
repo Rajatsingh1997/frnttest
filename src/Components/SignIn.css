@@ -1,0 +1,30 @@
+.formdiv{
+    width: 64%;
+    margin: auto;
+    margin-top: 90px;
+}
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+  margin-right: 0%;
+}
+.navbar-brand.box {
+  padding: 10px;
+  word-spacing: 8px;
+  font-size: 22px;
+  font-weight: 500;
+}
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  word-spacing: 12px;
+}
+.bg-light.box0 {
+  background-color: #93c5c3 !important;
+}
