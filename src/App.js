@@ -1,6 +1,7 @@
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
-import Invoice from "./Components/Invoice";
+import Frm from "./Components/Frm";
+import Listone from "./Components/Listone";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { HashRouter, Route, Switch } from "react-router-dom";
@@ -8,11 +9,12 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <div>
-    {/* <Invoice/> */}
+    {/* <Listone/> */}
       <HashRouter>
         <Switch>
           <Route path="/" exact component={SignIn} />
           <Route path="/Signup" exact component={SignUp} />
+          <Route path="/Frm" exact component={Frm} />
         </Switch>
       </HashRouter>
     </div>

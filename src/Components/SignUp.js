@@ -71,9 +71,6 @@ export default function SignUpfrm() {
             >
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
 
           <Button
             variant="primary"
