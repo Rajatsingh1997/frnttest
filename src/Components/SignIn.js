@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import "./SignIn.css";
 
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const[isValid,setIsValid]=useState(false)
@@ -13,10 +13,19 @@ export default function SignIn() {
   const handleSubmit = () => {   
     const allUserData=JSON.parse(localStorage.getItem('credentials'))||[]
     console.log(allUserData,'EEEEEEEEEEEEE')
+    let isValidUser=false
     allUserData.map(val=>{
       if(user===val.username && password===val.password)
-      setIsValid(true)
+      isValidUser=true
+      
     })
+    if(isValidUser){
+      setIsValid(true)
+      props.history.push("/frm")
+    }
+else{
+  isValidUser(false)
+}
     setUser("");
     setPassword("");
   };

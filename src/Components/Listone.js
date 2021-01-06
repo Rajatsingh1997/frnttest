@@ -1,15 +1,30 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Navbar, Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-function Invoice() {
+function Invoice(props) {
+  const[invoceList,setInvoiceList]=useState([])
+  useEffect(() => {
+   const invoice=JSON.parse(localStorage.getItem("list"))||[]
+   setInvoiceList(invoice)
+  }, [])
+console.log(invoceList,"zzzzzz")
+const handleDelete=async(i)=>{
+  const updatedList=[...invoceList]
+  const list=updatedList.filter((val,key)=>key!==i)
+   await setInvoiceList(list)
+  await localStorage.setItem("list",JSON.stringify(list))
+}
+const handleEdit=(i,val)=>{
+props.history.push({pathname:"/frm",state:{index:i,value:val}})
+}
   return (
     <div>
       <div>
         <Navbar bg="light" expand="lg" className="box0">
           <Navbar.Brand className="box">Invoice Managment System </Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
-          {/* <Link to="/Signup"> */}
-          <Button variant="success">Log out</Button> {/* </Link> */}
+          <Link to="/"> 
+          <Button variant="success">Log out</Button> </Link>
         </Navbar>
       </div>
 
@@ -27,7 +42,23 @@ function Invoice() {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {invoceList.map((val,i)=>{
+              return(
+                <tr>
+              <td>{val.name}</td>
+              <td>{val.description}</td>
+              <td>{val.units}</td>
+              <td>{val.quantity}</td>
+              <td>{val.price}</td>
+              <td>{val.discount}</td>
+              <td>{val.tax}</td>
+              <td> <Button variant="primary" onClick={()=>handleEdit(i,val)}>Edit</Button>{' '}
+              <Button variant="danger" onClick={()=>handleDelete(i)}>Delete</Button></td>
+            </tr>
+              )
+            })}
+          </tbody>
         </Table>
         <Link to="/Frm">
           <Button variant="primary">Add invoice</Button>{" "}

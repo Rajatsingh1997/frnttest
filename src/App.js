@@ -9,12 +9,12 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <div>
-    {/* <Listone/> */}
       <HashRouter>
         <Switch>
           <Route path="/" exact component={SignIn} />
           <Route path="/Signup" exact component={SignUp} />
           <Route path="/Frm" exact component={Frm} />
+          <Route path="/listone" exact component={Listone} />
         </Switch>
       </HashRouter>
     </div>

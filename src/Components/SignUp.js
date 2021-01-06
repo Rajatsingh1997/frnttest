@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Form, Button, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 
 
-export default function SignUpfrm() {
+export default function SignUpfrm(props) {
+
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [dob, setDob] = useState("");
   const [arr,setArr]=useState([]);
 
-
+ useEffect(() => {
+  localStorage.removeItem("list");
+ }, [])
 
   const handleSubmit =async () => {
     let SignUpdata=[...arr]
@@ -18,6 +21,7 @@ export default function SignUpfrm() {
       username: user.trim(),
       password: password.trim(),
       dob: dob.trim(),
+
       
     };
     SignUpdata.push(formData)
@@ -29,7 +33,7 @@ export default function SignUpfrm() {
   await setUser("");
    await setPassword("");
    await setDob("")
-  
+  props.history.push("/")
   };
 
   return (
